@@ -1,0 +1,245 @@
+{
+ "input": "video4g5",
+ "fmt": "raw",
+ "inputBytes": 4541818176,
+ "startedAt": "2026-10-15T01:19:16.014Z",
+ "encrypt": {
+  "fmt": "raw",
+  "input": "/private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bbb_4g5.mp4",
+  "inputBytes": 4541818176,
+  "envelopeBytes": 4542095548,
+  "contentLength": 4541818176,
+  "planMs": 0,
+  "kdfMs": 87,
+  "encryptMs": 2638,
+  "totalMs": 2725,
+  "maxRssBytes": 1372512,
+  "wallMs": 2970,
+  "timeMaxRss": 1406222336
+ },
+ "publish": {
+  "root": "bafybeiaykpaant4ctydtsj5w5wny65z5ywq3uegxkaxzeqplvcvegmckti",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeiaykpaant4ctydtsj5w5wny65z5ywq3uegxkaxzeqplvcvegmckti",
+  "envelopeBytes": 4542095548,
+  "outerCarBytes": 4542481719,
+  "packMs": 6102,
+  "importMs": 5267,
+  "wallMs": 11859,
+  "timeMaxRss": 248414208
+ },
+ "peakTempDiskBytes": 9084577267,
+ "decrypt": {
+  "fmt": "raw",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeiaykpaant4ctydtsj5w5wny65z5ywq3uegxkaxzeqplvcvegmckti",
+  "totalMs": 4338,
+  "firstPlainMs": 117,
+  "maxRssBytes": 225344,
+  "files": 1,
+  "bytes": 4541818176,
+  "wallMs": 4520,
+  "timeMaxRss": 230965248
+ },
+ "verify": {
+  "ok": true,
+  "sha256": "77ecfbcb3b80d26617bb159afc93dfb39b774914d36be3fd08f5d919f3c43d9c"
+ },
+ "seek": {
+  "fmt": "raw",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeiaykpaant4ctydtsj5w5wny65z5ywq3uegxkaxzeqplvcvegmckti",
+  "path": "-",
+  "parseMs": 98,
+  "parseBytes": 3040,
+  "prepRequests": 0,
+  "prepBytes": 0,
+  "seeks": [
+   {
+    "offset": 0,
+    "len": 65536,
+    "ttfbMs": 10,
+    "ms": 10,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 784351692,
+    "len": 65536,
+    "ttfbMs": 10,
+    "ms": 10,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 872970630,
+    "len": 65536,
+    "ttfbMs": 10,
+    "ms": 10,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 1061689297,
+    "len": 65536,
+    "ttfbMs": 11,
+    "ms": 11,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 1384391327,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 1533939405,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 2270909088,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 2633633211,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 2872583525,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 266256,
+    "ok": true
+   },
+   {
+    "offset": 2975547629,
+    "len": 65536,
+    "ttfbMs": 10,
+    "ms": 10,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 3057159795,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3085945966,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 3212262834,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 3358259744,
+    "len": 65536,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3605679612,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 266256,
+    "ok": true
+   },
+   {
+    "offset": 3758457256,
+    "len": 65536,
+    "ttfbMs": 9,
+    "ms": 9,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 4011149057,
+    "len": 65536,
+    "ttfbMs": 9,
+    "ms": 9,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 4523045527,
+    "len": 65536,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 4541752640,
+    "len": 65536,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 176432,
+    "ok": true
+   },
+   {
+    "offset": 4541818175,
+    "len": 1,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 176432,
+    "ok": true
+   }
+  ],
+  "allOk": true,
+  "ttfbMedianMs": 8,
+  "ttfbMaxMs": 11,
+  "bytesPerSeekAvg": 308861,
+  "maxRssBytes": 133696,
+  "wallMs": 426,
+  "timeMaxRss": 137084928
+ },
+ "ok": true
+}

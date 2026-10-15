@@ -1,0 +1,98 @@
+{
+ "fmt": "car",
+ "root": "bafybeid3vv3zj6lx22b7o5u7fowvgwtc6cbvauwum5nvx7s55mmhk2vhxu",
+ "path": "bbb_sunflower_2160p_60fps_normal.mp4",
+ "startedAt": "2026-10-15T01:16:47.199Z",
+ "start": {
+  "loadedMetadataMs": 104.5,
+  "firstFrameMs": 394.19999980926514,
+  "duration": 634.566666,
+  "videoWidth": 3840,
+  "videoHeight": 2160
+ },
+ "playHead": {
+  "from": 0,
+  "to": 4.959874,
+  "advanced": 4.959874,
+  "framesShown": 297,
+  "dropped": 0,
+  "readyState": 4,
+  "error": null
+ },
+ "seeks": [
+  {
+   "frac": 0.1,
+   "target": 63.456666600000005,
+   "seekedMs": 281.69999980926514,
+   "frameMs": 279,
+   "play": {
+    "from": 63.456666,
+    "to": 68.417095,
+    "advanced": 4.960429000000005,
+    "framesShown": 300,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  },
+  {
+   "frac": 0.5,
+   "target": 317.283333,
+   "seekedMs": 70.10000014305115,
+   "frameMs": 65.60000014305115,
+   "play": {
+    "from": 317.283333,
+    "to": 322.242946,
+    "advanced": 4.95961299999999,
+    "framesShown": 299,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  },
+  {
+   "frac": 0.9,
+   "target": 571.1099994000001,
+   "seekedMs": 130.29999995231628,
+   "frameMs": 124.79999995231628,
+   "play": {
+    "from": 571.109999,
+    "to": 576.071175,
+    "advanced": 4.961176000000023,
+    "framesShown": 300,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  }
+ ],
+ "tail": {
+  "frac": 0.987392971568412,
+  "target": 626.566666,
+  "seekedMs": 325.80000019073486,
+  "frameMs": 321.7000000476837,
+  "end": {
+   "ended": true,
+   "currentTime": 634.566666,
+   "duration": 634.566666
+  }
+ },
+ "pageHeapBytes": 885496,
+ "sw": {
+  "car|bafybeid3vv3zj6lx22b7o5u7fowvgwtc6cbvauwum5nvx7s55mmhk2vhxu|bbb_sunflower_2160p_60fps_normal.mp4": {
+   "size": 673223862,
+   "prep": {
+    "prepMs": 83.20000004768372,
+    "requests": 3,
+    "bytes": 276226,
+    "metadataBytes": 32384
+   },
+   "requests": 129,
+   "bytes": 75015206,
+   "ranges": 12,
+   "firstByteMsMedian": 2
+  }
+ },
+ "chromeRssPeakBytes": 1352155136,
+ "chromeRssSamples": 29
+}

@@ -1,0 +1,14 @@
+video673 raw: ok=true enc=423ms env=673265118 dec=788ms rss=211353600 seekTTFBmed=7ms bytes/seek=295226
+video673 car: ok=true enc=1351ms env=673322606 dec=1304ms rss=234389504 seekTTFBmed=7ms bytes/seek=319214
+video673 tar: ok=true enc=406ms env=673266993 dec=784ms rss=214892544 seekTTFBmed=7ms bytes/seek=295412
+bundle car: ok=true enc=1788ms env=881875939 dec=1705ms rss=236978176 seekTTFBmed=7ms bytes/seek=344364
+bundle tar: ok=true enc=567ms env=882044145 dec=1074ms rss=226033664 seekTTFBmed=6ms bytes/seek=317686
+rand1g raw: ok=true enc=603ms env=1073807512 dec=1175ms rss=214597632 seekTTFBmed=7ms bytes/seek=317738
+rand1g car: ok=true enc=2084ms env=1073898900 dec=2067ms rss=239927296 seekTTFBmed=8ms bytes/seek=287444
+rand1g tar: ok=true enc=568ms env=1073809073 dec=1146ms rss=216907776 seekTTFBmed=7ms bytes/seek=304785
+video4g raw: ERROR 
+video4g car: ERROR 
+video4g tar: ERROR 
+rand5g raw: ok=true enc=3145ms env=5369036956 dec=5556ms rss=249462784 seekTTFBmed=7ms bytes/seek=317790
+rand5g car: ok=true enc=10239ms env=5369493422 dec=10300ms rss=294486016 seekTTFBmed=7ms bytes/seek=324110
+rand5g tar: ok=true enc=2761ms env=5369038513 dec=5131ms rss=239239168 seekTTFBmed=7ms bytes/seek=304785

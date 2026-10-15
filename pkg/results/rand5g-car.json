@@ -1,0 +1,261 @@
+{
+ "input": "rand5g",
+ "fmt": "car",
+ "inputBytes": 5368709120,
+ "startedAt": "2026-10-15T01:11:31.462Z",
+ "encrypt": {
+  "fmt": "car",
+  "input": "/private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/rand_5g.bin",
+  "inputBytes": 5368709120,
+  "envelopeBytes": 5369493422,
+  "contentLength": 5369165527,
+  "contentType": "application/vnd.ipld.car",
+  "planMs": 3825,
+  "kdfMs": 89,
+  "encryptMs": 6325,
+  "totalMs": 10239,
+  "maxRssBytes": 291584,
+  "root": "bafybeihnmaf76krl5hvqyxyr2u7cugblpuqqujczh5zdqtqk7gxxxbhvv4",
+  "metadataBytes": 256727,
+  "metadataBlocks": 7,
+  "leaves": 5120,
+  "files": 1,
+  "dirs": 0,
+  "skippedSymlinks": [],
+  "wallMs": 10387,
+  "timeMaxRss": 299155456
+ },
+ "publish": {
+  "root": "bafybeianh62mhyouhmkvfxr4jycdl4rbinnlmua6di2ijj46xxz4igehdm",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeianh62mhyouhmkvfxr4jycdl4rbinnlmua6di2ijj46xxz4igehdm",
+  "envelopeBytes": 5369493422,
+  "outerCarBytes": 5369949913,
+  "packMs": 7619,
+  "importMs": 5920,
+  "wallMs": 14164,
+  "timeMaxRss": 236994560
+ },
+ "peakTempDiskBytes": 10739443335,
+ "decrypt": {
+  "fmt": "car",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeianh62mhyouhmkvfxr4jycdl4rbinnlmua6di2ijj46xxz4igehdm",
+  "contentType": "application/vnd.ipld.car",
+  "totalMs": 10300,
+  "firstPlainMs": 118,
+  "maxRssBytes": 287360,
+  "metadataBlocks": 7,
+  "leaves": 5120,
+  "bytes": 5368709120,
+  "listMs": 33.470124999999996,
+  "files": 1,
+  "dirs": 0,
+  "wallMs": 10501,
+  "timeMaxRss": 294486016
+ },
+ "verify": {
+  "ok": true,
+  "sha256": "cb3018289f79ce46ed5bd5736f44d17a2e2fab70c7171a0968f709993daad7b4"
+ },
+ "seek": {
+  "fmt": "car",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeianh62mhyouhmkvfxr4jycdl4rbinnlmua6di2ijj46xxz4igehdm",
+  "path": "rand_5g.bin",
+  "parseMs": 100,
+  "parseBytes": 3040,
+  "prepMs": 42,
+  "metadataBytes": 256727,
+  "files": 1,
+  "prepRequests": 2,
+  "prepBytes": 297952,
+  "seeks": [
+   {
+    "offset": 0,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 927154122,
+    "len": 65536,
+    "ttfbMs": 11,
+    "ms": 15,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 1031907403,
+    "len": 65536,
+    "ttfbMs": 13,
+    "ms": 13,
+    "requests": 2,
+    "bytesFetched": 266256,
+    "ok": true
+   },
+   {
+    "offset": 1254985000,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 1636439543,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 1813214985,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 2684354560,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3113123757,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3395578389,
+    "len": 65536,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3517288578,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 3613759406,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 3647786510,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3797101168,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 3969678901,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 4262145091,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 266256,
+    "ok": true
+   },
+   {
+    "offset": 4442738086,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265200,
+    "ok": true
+   },
+   {
+    "offset": 4741436040,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 527360,
+    "ok": true
+   },
+   {
+    "offset": 5346530573,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 266256,
+    "ok": true
+   },
+   {
+    "offset": 5368643584,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 197319,
+    "ok": true
+   },
+   {
+    "offset": 5368709119,
+    "len": 1,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 197319,
+    "ok": true
+   }
+  ],
+  "allOk": true,
+  "ttfbMedianMs": 7,
+  "ttfbMaxMs": 13,
+  "bytesPerSeekAvg": 324110,
+  "maxRssBytes": 172096,
+  "wallMs": 466,
+  "timeMaxRss": 176259072
+ },
+ "ok": true
+}

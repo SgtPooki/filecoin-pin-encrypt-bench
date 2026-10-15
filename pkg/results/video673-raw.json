@@ -1,0 +1,245 @@
+{
+ "input": "video673",
+ "fmt": "raw",
+ "inputBytes": 673223862,
+ "startedAt": "2026-10-15T01:09:33.949Z",
+ "encrypt": {
+  "fmt": "raw",
+  "input": "/private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/media/bbb_sunflower_2160p_60fps_normal.mp4",
+  "inputBytes": 673223862,
+  "envelopeBytes": 673265118,
+  "contentLength": 673223862,
+  "planMs": 0,
+  "kdfMs": 88,
+  "encryptMs": 334,
+  "totalMs": 423,
+  "maxRssBytes": 234208,
+  "wallMs": 563,
+  "timeMaxRss": 240484352
+ },
+ "publish": {
+  "root": "bafybeigxpwkhipj2j4tacpvvm2oomtuhuirgevanolkkg3yahee2bid4i4",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeigxpwkhipj2j4tacpvvm2oomtuhuirgevanolkkg3yahee2bid4i4",
+  "envelopeBytes": 673265118,
+  "outerCarBytes": 673322454,
+  "packMs": 873,
+  "importMs": 805,
+  "wallMs": 1897,
+  "timeMaxRss": 205717504
+ },
+ "peakTempDiskBytes": 1346587572,
+ "decrypt": {
+  "fmt": "raw",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeigxpwkhipj2j4tacpvvm2oomtuhuirgevanolkkg3yahee2bid4i4",
+  "totalMs": 788,
+  "firstPlainMs": 119,
+  "maxRssBytes": 206176,
+  "files": 1,
+  "bytes": 673223862,
+  "wallMs": 943,
+  "timeMaxRss": 211353600
+ },
+ "verify": {
+  "ok": true,
+  "sha256": "35db9a007021f1b0066993e1d2c4448c83a8b279f799c97d33cbba73980a8a36"
+ },
+ "seek": {
+  "fmt": "raw",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeigxpwkhipj2j4tacpvvm2oomtuhuirgevanolkkg3yahee2bid4i4",
+  "path": "-",
+  "parseMs": 97,
+  "parseBytes": 3041,
+  "prepRequests": 0,
+  "prepBytes": 0,
+  "seeks": [
+   {
+    "offset": 0,
+    "len": 65536,
+    "ttfbMs": 10,
+    "ms": 10,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 116253110,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 129387814,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 157358853,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 205188309,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 227353659,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 336611931,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 390345372,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 425761522,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 441022402,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 453118593,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 457385151,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 476107274,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 497746285,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 534417755,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 557061776,
+    "len": 65536,
+    "ttfbMs": 10,
+    "ms": 10,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 594514628,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 670385641,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 673158326,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 303287,
+    "ok": true
+   },
+   {
+    "offset": 673223861,
+    "len": 1,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 41127,
+    "ok": true
+   }
+  ],
+  "allOk": true,
+  "ttfbMedianMs": 7,
+  "ttfbMaxMs": 10,
+  "bytesPerSeekAvg": 295226,
+  "maxRssBytes": 130880,
+  "wallMs": 424,
+  "timeMaxRss": 134217728
+ },
+ "ok": true
+}

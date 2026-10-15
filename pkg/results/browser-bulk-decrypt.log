@@ -1,0 +1,4 @@
+{"label":"raw673","bytes":673223862,"pieces":2569,"blocks":0,"ms":730,"gbps":0.92,"heapPeakMB":322,"chromeRssPeakMB":1402}
+{"label":"car673","bytes":673281323,"pieces":2569,"blocks":645,"ms":897,"gbps":0.75,"heapPeakMB":110,"chromeRssPeakMB":1496}
+{"label":"raw4g5","bytes":4541818176,"pieces":17326,"blocks":0,"ms":3145,"gbps":1.44,"heapPeakMB":124,"chromeRssPeakMB":1659}
+{"label":"car4g5","bytes":4542204447,"pieces":17328,"blocks":4339,"ms":4360,"gbps":1.04,"heapPeakMB":190,"chromeRssPeakMB":1933}

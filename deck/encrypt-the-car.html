@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Encrypt the CAR: payload format benchmarks for filecoin-pin encrypted uploads</title>
+<!--
+  Single-file slide deck template. Self-contained: inline CSS + JS, no external resources
+  (so it renders offline and from IPFS). Each slide is one <section class="slide">.
+  Keyboard: arrows / space / PageUp-Down navigate, Home / End jump, F toggles fullscreen.
+  The counter reads slides.length, so it stays correct as you add or remove slides.
+  Replace the example slides below. Keep the components; delete what you do not use.
+-->
+<style>
+  :root {
+    --bg: #0b1020;
+    --panel: #121a30;
+    --ink: #e8edf7;
+    --muted: #93a1bf;
+    --accent: #2bb9ff;
+    --accent2: #7c5cff;
+    --good: #36d399;
+    --warn: #f6b73c;
+    --line: #243150;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; background: var(--bg); color: var(--ink); font-family: var(--sans); }
+  .deck { height: 100vh; width: 100vw; overflow: hidden; position: relative; }
+  .slide {
+    position: absolute; inset: 0; display: none;
+    padding: 5vh 7vw; flex-direction: column; justify-content: center;
+    animation: fade .25s ease;
+  }
+  .slide.active { display: flex; }
+  @keyframes fade { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+
+  h1 { font-size: clamp(28px, 4.2vw, 56px); line-height: 1.05; margin: 0 0 18px; letter-spacing: -.02em; }
+  h2 { font-size: clamp(22px, 3vw, 40px); margin: 0 0 22px; letter-spacing: -.02em; }
+  h2 .kicker { display:block; font-size: 14px; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; font-weight: 700; }
+  p { font-size: clamp(16px, 1.5vw, 21px); line-height: 1.5; color: var(--ink); margin: 0 0 14px; max-width: 62ch; }
+  .muted { color: var(--muted); }
+  .big { font-size: clamp(34px, 6vw, 84px); font-weight: 800; letter-spacing: -.03em; line-height: 1; }
+  .accent { color: var(--accent); }
+  .accent2 { color: var(--accent2); }
+  .good { color: var(--good); }
+  .warn { color: var(--warn); }
+  .mono { font-family: var(--mono); }
+
+  .formula {
+    font-family: var(--mono); font-size: clamp(15px, 1.9vw, 26px);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 22px; margin: 6px 0 18px; line-height: 1.6; color: var(--ink);
+  }
+  .formula .op { color: var(--muted); }
+
+  table { border-collapse: collapse; width: 100%; font-size: clamp(13px, 1.4vw, 19px); }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { color: var(--muted); font-weight: 600; font-size: .8em; letter-spacing: .06em; text-transform: uppercase; }
+  td.num, th.num { text-align: right; font-family: var(--mono); }
+  tr.total td { border-top: 2px solid var(--accent); border-bottom: none; font-weight: 800; }
+  tbody tr:hover { background: rgba(43,185,255,.05); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+  .card .label { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .card .v { font-size: clamp(24px, 3vw, 40px); font-weight: 800; letter-spacing: -.02em; }
+  .card .sub { color: var(--muted); font-size: 14px; margin-top: 6px; }
+
+  ul.tight { margin: 0; padding-left: 1.1em; }
+  ul.tight li { font-size: clamp(15px, 1.5vw, 21px); line-height: 1.5; margin-bottom: 12px; max-width: 62ch; }
+  ul.tight li::marker { color: var(--accent); }
+
+  .footnote { position: absolute; left: 7vw; right: 7vw; bottom: 3.5vh; color: var(--muted); font-size: 12.5px; border-top: 1px solid var(--line); padding-top: 10px; }
+  .tag { font-family: var(--mono); font-size: 12px; color: var(--accent); letter-spacing: .12em; text-transform: uppercase; margin-bottom: 10px; }
+  .quote { border-left: 3px solid var(--accent2); padding: 4px 0 4px 18px; color: var(--ink); font-style: italic; max-width: 56ch; }
+
+  .hud { position: fixed; bottom: 16px; right: 20px; font-family: var(--mono); font-size: 13px; color: var(--muted); z-index: 10; }
+  .hud b { color: var(--ink); }
+  .bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--accent2)); z-index: 10; transition: width .2s; }
+  .nav { position: fixed; bottom: 14px; left: 20px; z-index: 10; display: flex; gap: 8px; }
+  .nav button { background: var(--panel); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 6px 12px; font-size: 14px; cursor: pointer; }
+  .nav button:hover { border-color: var(--accent); }
+  .hint { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); color: var(--muted); font-size: 12px; z-index: 10; }
+</style>
+</head>
+<body>
+<div class="bar" id="bar"></div>
+<div class="deck" id="deck">
+
+  <!-- TITLE -->
+  <!-- 1 TITLE -->
+  <section class="slide active">
+    <div class="tag">filecoin-pin / encrypted uploads / 2026-10-14</div>
+    <h1>Encrypt the CAR</h1>
+    <p class="muted" style="font-size:clamp(18px,2vw,26px)">Benchmarking three payload formats for password-protected uploads: raw bytes, tar, and a UnixFS CAR. 30 round trips, 400 random reads, 5 hours of 4K video played in Chrome, one upstream bug.</p>
+    <p class="muted" style="font-size:14px;max-width:none;margin-top:14px;border-top:1px solid var(--line);padding-top:10px">All numbers measured at runtime on an Apple Silicon Mac (10 cores, 64 GiB), Node 24.18, Kubo 0.43.1 offline, Chrome via Playwright 1.60. Code and raw JSON: bench/pkg.</p>
+  </section>
+
+  <!-- 2 THE QUESTION -->
+  <section class="slide">
+    <h2><span class="kicker">the question</span>What goes inside the envelope is forever</h2>
+    <div class="grid2">
+      <div>
+        <p>The <b>Filecoin Encryption Envelope</b> (FEE) wraps plaintext in chunked AES-256-GCM. It does not care what the plaintext is, and its only header slot (<code>appMetadata</code>) is public.</p>
+        <p>filecoin-pin PR #771 encrypts the <b>raw file bytes</b>. A reviewer proposed a <b>UnixFS CAR</b> instead. A third reviewer proposed <b>tar</b>.</p>
+        <p>Uploads to Filecoin are immutable and paid. Whatever ships first, every decryptor has to read it for as long as the data exists.</p>
+      </div>
+      <div class="card">
+        <div class="label">the bar set for this work</div>
+        <div class="v" style="font-size:clamp(18px,1.8vw,24px)">No plan with a glaring problem</div>
+        <div class="sub">Example of a glaring problem: "consumers cannot stream a video encrypted this way." So: multi-GB inputs, real video, a real browser, every media shape.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 CANDIDATES -->
+  <section class="slide">
+    <h2><span class="kicker">candidates</span>Three ways to fill the plaintext</h2>
+    <table>
+      <thead><tr><th>payload</th><th>plaintext inside FEE</th><th>names</th><th>dirs</th><th>content_type</th></tr></thead>
+      <tbody>
+        <tr><td><b>raw</b> (today)</td><td>the file bytes</td><td>lost</td><td>no</td><td class="mono">unset</td></tr>
+        <tr><td><b>tar</b></td><td>ustar/PAX archive rooted at the input's basename</td><td>kept</td><td>sequential</td><td class="mono">application/x-tar</td></tr>
+        <tr><td><b>CAR</b></td><td>CARv1 of a UnixFS DAG (unixfs-v1-2025 profile): anonymous root directory wrapping the input</td><td>kept</td><td>yes, incl. HAMT</td><td class="mono">application/vnd.ipld.car</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:18px">Earlier reviewers split 3:1 for CAR, all agreed on one thing: do not ship raw now and switch later.</p>
+  </section>
+
+  <!-- 4 METHOD -->
+  <section class="slide">
+    <h2><span class="kicker">method</span>Same pipeline filecoin-pin uses, measured end to end</h2>
+    <div class="formula">input <span class="op">&rarr;</span> payload <span class="op">&rarr;</span> fee.encrypt <span class="op">&rarr;</span> createCarFromPath (PR code) <span class="op">&rarr;</span> ipfs dag import <span class="op">&rarr;</span> gateway Range <span class="op">&rarr;</span> decrypt / seek / &lt;video&gt;</div>
+    <div class="grid3">
+      <div class="card"><div class="label">per input and format</div><div class="sub" style="font-size:15px">encrypt (PBKDF2 600k + FEE, 256 KiB chunks), publish, single-pass streaming decrypt, sha256 or diff -r, 20 random 64 KiB reads incl. offset 0 and the last byte</div></div>
+      <div class="card"><div class="label">browser</div><div class="sub" style="font-size:15px">page + Service Worker answering <code>&lt;video&gt;</code> Range requests with <code>fee.decryptRange</code>, Google Chrome headless, first frame, seeks at 10/50/90 percent, tail to <code>ended</code>, full 16x playthrough</div></div>
+      <div class="card"><div class="label">honesty</div><div class="sub" style="font-size:15px">peak RSS from /usr/bin/time, bytes counted as read from the network, every read compared to the original bytes, one independent Codex investigation of the surprise finding</div></div>
+    </div>
+  </section>
+
+  <!-- 5 INPUTS -->
+  <section class="slide">
+    <h2><span class="kicker">inputs</span>Every media shape that could embarrass a format</h2>
+    <table>
+      <thead><tr><th>name</th><th>what</th><th class="num">bytes</th><th>why</th></tr></thead>
+      <tbody>
+        <tr><td>video673</td><td>Big Buck Bunny 4K60 H.264 MP4</td><td class="num">673,223,862</td><td>real video, 643 chunks</td></tr>
+        <tr><td>video4g5</td><td>same, concatenated 7x, AAC, +faststart</td><td class="num">4,541,818,176</td><td>74 min, 4332 chunks, 5 intermediate DAG nodes</td></tr>
+        <tr><td>rand1g</td><td>random bytes</td><td class="num">1,073,741,824</td><td>exactly 1024 chunks, the DAG-width edge</td></tr>
+        <tr><td>rand5g</td><td>random bytes</td><td class="num">5,368,709,120</td><td>5120 chunks, above 2^32</td></tr>
+        <tr><td>dedup512m</td><td>4 of every 5 MiB blocks repeat</td><td class="num">536,870,912</td><td>dedup worst case for raw/tar</td></tr>
+        <tr><td>bundle</td><td>354 files, nested dirs, 200 MB + 673 MB files, empty file and dir, 100+ byte Unicode name, 3 hostile symlinks</td><td class="num">881,713,112</td><td>directory semantics and safety</td></tr>
+        <tr><td>manyfiles</td><td>6000 x 1 KiB</td><td class="num">6,144,000</td><td>HAMT-sharded directory</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 6 KEY IDEA -->
+  <section class="slide">
+    <h2><span class="kicker">the idea everything rides on</span>Metadata-first block order makes a CAR seekable with no index</h2>
+    <div class="grid2">
+      <div>
+        <p>A CARv1 is just a header followed by blocks. Writers normally emit leaves first and the root last, so a reader cannot locate anything until it has read everything.</p>
+        <p><b>Rule:</b> write every dag-pb node first (breadth-first from the root, each once), then every raw leaf in file order, each CID once.</p>
+        <p>A reader streams from offset 0 until the DAG closes, cancels, and from then on every file offset is arithmetic.</p>
+      </div>
+      <div>
+        <div class="formula">offset(leaf<sub>k</sub>) <span class="op">=</span> header <span class="op">+</span> &Sigma; metadata sections <span class="op">+</span> &Sigma;<sub>j&lt;k</sub> (varint <span class="op">+</span> 36 B CID <span class="op">+</span> Tsize<sub>j</sub>)</div>
+        <div class="grid2" style="gap:14px">
+          <div class="card"><div class="label">metadata, 4.5 GB file</div><div class="v accent">217 KB</div><div class="sub">one open-ended decryptRange, cancelled at closure</div></div>
+          <div class="card"><div class="label">metadata, 6000-file HAMT dir</div><div class="v accent">397 KB</div><div class="sub">508 dag-pb nodes, list in 38 ms</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="muted" style="font-size:14px;max-width:none;margin-top:14px;border-top:1px solid var(--line);padding-top:10px">Kubo imports the result as ordinary UnixFS (dag import, ls, gateway fetches byte-identical). The order only matters to readers that want to seek without an index; built in two passes over the input, no plaintext temp file.</p>
+  </section>
+
+  <!-- 7 ENCRYPT SIDE -->
+  <section class="slide">
+    <h2><span class="kicker">result 1: encrypt side</span>CAR costs 3x the CPU, writes nothing extra, and dedups</h2>
+    <div class="grid3" style="margin-bottom:16px">
+      <div class="card"><div class="label">throughput</div><div class="v warn">0.5 GB/s</div><div class="sub">CAR, vs 1.6 to 2.0 GB/s raw and tar (two passes + SHA-256 of every chunk)</div></div>
+      <div class="card"><div class="label">plaintext on disk</div><div class="v good">none</div><div class="sub">all three formats; peak temp disk = envelope + outer CAR</div></div>
+      <div class="card"><div class="label">dedup input, envelope</div><div class="v good">108 MB</div><div class="sub">CAR, vs 537 MB raw and tar (-79.9 percent)</div></div>
+    </div>
+    <table>
+      <thead><tr><th>input</th><th class="num">raw ms</th><th class="num">tar ms</th><th class="num">CAR ms</th><th class="num">CAR pass 1 (hash)</th><th class="num">CAR RSS MB</th></tr></thead>
+      <tbody>
+        <tr><td>video673</td><td class="num">423</td><td class="num">406</td><td class="num">1351</td><td class="num">491</td><td class="num">196</td></tr>
+        <tr><td>video4g5</td><td class="num">2725</td><td class="num">2229</td><td class="num">8450</td><td class="num">3203</td><td class="num">289</td></tr>
+        <tr><td>rand5g</td><td class="num">3145</td><td class="num">2761</td><td class="num">10239</td><td class="num">3825</td><td class="num">299</td></tr>
+        <tr><td>bundle (851 MB)</td><td class="num muted">n/a</td><td class="num">567</td><td class="num">1788</td><td class="num">653</td><td class="num">315</td></tr>
+      </tbody>
+    </table>
+    <p class="muted" style="font-size:14px;max-width:none;margin-top:14px;border-top:1px solid var(--line);padding-top:10px">Envelope overhead over the input is 0.01 to 0.04 percent for every format (FEE tag per 256 KiB chunk). Re-hashing leaves in pass 2 is a third of the CAR cost: 1 GiB total 2119 ms with it, 1483 ms without; raw 513 ms.</p>
+  </section>
+
+  <!-- 8 DECRYPT -->
+  <section class="slide">
+    <h2><span class="kicker">result 2: streaming decrypt</span>Single pass, flat memory, every byte matched</h2>
+    <table>
+      <thead><tr><th>input</th><th class="num">raw ms</th><th class="num">tar ms</th><th class="num">CAR ms</th><th class="num">CAR list ms</th><th class="num">peak RSS MB (raw / tar / CAR)</th></tr></thead>
+      <tbody>
+        <tr><td>video673</td><td class="num">788</td><td class="num">784</td><td class="num">1304</td><td class="num">12</td><td class="num">211 / 215 / 234</td></tr>
+        <tr><td>video4g5</td><td class="num">4338</td><td class="num">4503</td><td class="num">9814</td><td class="num">30</td><td class="num">231 / 245 / 304</td></tr>
+        <tr><td>rand5g</td><td class="num">5556</td><td class="num">5131</td><td class="num">10300</td><td class="num">33</td><td class="num">249 / 239 / 294</td></tr>
+        <tr><td>dedup512m</td><td class="num">659</td><td class="num">678</td><td class="num">463</td><td class="num">8</td><td class="num">215 / 220 / 200</td></tr>
+        <tr><td>bundle</td><td class="num muted">n/a</td><td class="num">1074</td><td class="num">1705</td><td class="num">12</td><td class="num">n/a / 226 / 237</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px">26 gateway round trips plus 4 through verified-fetch, 30 byte-identical results (sha256 or diff -r). RSS does not grow with size for any format, so decrypt is bounded-memory single pass. CAR re-verifies every leaf CID, which is redundant with the FEE tag: 1 GiB in 2018 ms with it, 1351 ms without.</p>
+    <p class="muted" style="font-size:14px;max-width:none;margin-top:14px;border-top:1px solid var(--line);padding-top:10px">"list ms" is when the full file list is known: CAR after the metadata prefix; tar only at EOF because entries are discovered as they stream past. The ~118 ms before the first plaintext byte is PBKDF2, identical for all.</p>
+  </section>
+
+  <!-- 9 SEEKS SINGLE FILE -->
+  <section class="slide">
+    <h2><span class="kicker">result 3: random reads, single files</span>Seeking is identical for all three</h2>
+    <table>
+      <thead><tr><th>input (20 x 64 KiB reads)</th><th>fmt</th><th class="num">prep requests</th><th class="num">prep KB</th><th class="num">TTFB median ms</th><th class="num">TTFB max ms</th><th class="num">KB fetched / seek</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3">video4g5 (4332 chunks)</td><td>raw</td><td class="num">0</td><td class="num">0</td><td class="num">8</td><td class="num">11</td><td class="num">309</td></tr>
+        <tr><td>tar</td><td class="num">3</td><td class="num">268</td><td class="num">7</td><td class="num">11</td><td class="num">309</td></tr>
+        <tr><td>CAR</td><td class="num">2</td><td class="num">298</td><td class="num">9</td><td class="num">15</td><td class="num">308</td></tr>
+        <tr><td rowspan="3">rand5g (5120 chunks)</td><td>raw</td><td class="num">0</td><td class="num">0</td><td class="num">7</td><td class="num">11</td><td class="num">318</td></tr>
+        <tr><td>tar</td><td class="num">3</td><td class="num">268</td><td class="num">7</td><td class="num">11</td><td class="num">305</td></tr>
+        <tr><td>CAR</td><td class="num">2</td><td class="num">298</td><td class="num">7</td><td class="num">13</td><td class="num">324</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px">Every seek costs one FEE chunk (256 KiB) plus tag, whatever the format, because <code>decryptRange</code> fetches chunk-aligned ciphertext. 400 of 400 reads across all inputs matched the original bytes, including the last byte of each file and the files with intermediate DAG nodes.</p>
+  </section>
+
+  <!-- 10 SEEKS DIRECTORY -->
+  <section class="slide">
+    <h2><span class="kicker">result 4: random reads inside a directory</span>This is the slide that decides it</h2>
+    <table>
+      <thead><tr><th>target</th><th>fmt</th><th class="num">header or node reads</th><th class="num">HTTP requests</th><th class="num">bytes fetched</th><th class="num">prep ms</th></tr></thead>
+      <tbody>
+        <tr><td rowspan="3">bundle: docs/small_99.txt (entry 360)</td><td>CAR</td><td class="num">0</td><td class="num good">2</td><td class="num good">330 KB</td><td class="num good">21</td></tr>
+        <tr><td>tar, no cache</td><td class="num">362</td><td class="num warn">725</td><td class="num warn">90.1 MB</td><td class="num warn">2032</td></tr>
+        <tr><td>tar, 64-entry chunk cache</td><td class="num">362</td><td class="num">35</td><td class="num">9.1 MB</td><td class="num">268</td></tr>
+        <tr><td rowspan="3">manyfiles: f6000.bin (entry 5560 of 6000, HAMT)</td><td>CAR</td><td class="num">0</td><td class="num good">2</td><td class="num good">560 KB</td><td class="num good">46</td></tr>
+        <tr><td>tar, no cache</td><td class="num">5560</td><td class="num warn">11,121</td><td class="num warn">1.48 GB</td><td class="num warn">20,465</td></tr>
+        <tr><td>tar, 64-entry chunk cache</td><td class="num">5560</td><td class="num">33</td><td class="num">8.7 MB</td><td class="num">1380</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px">Tar can only find entry N by reading headers 1 to N-1, each a full FEE chunk fetch unless cached. An external index would fix it, and that index is the manifest a CAR already is. Raw cannot hold a directory at all.</p>
+  </section>
+
+  <!-- 11 BROWSER -->
+  <section class="slide">
+    <h2><span class="kicker">result 5: real Chrome, decrypting Service Worker</span>4K video plays and seeks the same from all three</h2>
+    <table>
+      <thead><tr><th>4.5 GB, 74 min MP4</th><th class="num">first frame ms</th><th class="num">seek 10 / 50 / 90 pct ms</th><th>tail to ended</th><th class="num">full 16x wall s</th><th class="num">bytes fetched</th><th class="num">HTTP requests</th><th class="num">Chrome RSS peak</th></tr></thead>
+      <tbody>
+        <tr><td>raw</td><td class="num">459</td><td class="num">327 / 77 / 29</td><td class="good">yes</td><td class="num">385</td><td class="num">4.60 GB</td><td class="num">28</td><td class="num">1.85 GB</td></tr>
+        <tr><td>tar</td><td class="num">811</td><td class="num">344 / 77 / 34</td><td class="good">yes</td><td class="num">499</td><td class="num">4.60 GB</td><td class="num">28</td><td class="num">1.95 GB</td></tr>
+        <tr><td>CAR, per-leaf reader</td><td class="num">427</td><td class="num">338 / 61 / 34</td><td class="good">yes</td><td class="num">491</td><td class="num warn">5.77 GB</td><td class="num warn">8789</td><td class="num">1.97 GB</td></tr>
+        <tr><td>CAR, coalesced-span reader</td><td class="num">391</td><td class="num">331 / 73 / 36</td><td class="good">yes</td><td class="num">384</td><td class="num">4.60 GB</td><td class="num">29</td><td class="num">1.84 GB</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px">The first CAR reader issued one <code>decryptRange</code> per 1 MiB leaf and refetched the chunk shared by neighbours (+25 percent bytes). Reading each contiguous span of leaves in one call and stripping the 40-byte framing on the fly makes CAR indistinguishable from raw. Chrome RSS is the 4K decoder; page JS heap stayed under 2 MB.</p>
+    <p class="muted" style="font-size:14px;max-width:none;margin-top:14px;border-top:1px solid var(--line);padding-top:10px">673 MB video: first frame 781 / 440 / 394 ms (raw / tar / CAR), seeks 60 to 290 ms, all played to ended. The browser demuxes MP4 itself; the Service Worker only answers byte ranges, so any media Chrome can play from a URL plays here.</p>
+  </section>
+
+  <!-- 12 DIRECTORY SAFETY -->
+  <section class="slide">
+    <h2><span class="kicker">result 6: directories and safety</span>Bundles round-trip; hostile entries never land</h2>
+    <div class="grid2">
+      <div>
+        <ul class="tight">
+          <li>851 MB bundle: every regular file byte-identical after extract (diff -r), including the empty file, the empty directory, and a 100+ byte filename mixing Latin, CJK and an emoji (a PAX record in tar, a plain link name in UnixFS).</li>
+          <li>3 symlinks (<code>/etc/passwd</code>, <code>../../../tmp</code>, a file link) skipped at pack time by policy, reported to the user. Today's <code>add dir/</code> follows them (source: fast-glob default in globSource).</li>
+          <li>Extract: dirs 0700, files 0600 with exclusive create, names with <code>/</code>, <code>..</code>, NUL rejected, tar symlink and hardlink entries skipped, CAR rejects UnixFS symlink nodes, inline data, unknown codecs, out-of-order blocks.</li>
+        </ul>
+      </div>
+      <div class="grid2" style="gap:14px">
+        <div class="card"><div class="label">6000-file HAMT dir, CAR</div><div class="v good">1.3 s</div><div class="sub">full extract; list 38 ms; any entry in 2 requests</div></div>
+        <div class="card"><div class="label">small-file overhead</div><div class="v">+10% / +50%</div><div class="sub">CAR / tar on 1 KiB files (per-file node vs 512 B header + padding)</div></div>
+        <div class="card"><div class="label">bundle list time, CAR</div><div class="v good">13 ms</div><div class="sub">tar: complete only at EOF</div></div>
+        <div class="card"><div class="label">dedup inside bundle</div><div class="v good">kept</div><div class="sub">repeated leaf stored once, written to every target</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 PROS CONS -->
+  <section class="slide">
+    <h2><span class="kicker">scorecard</span>Where each format wins and where it is disqualified</h2>
+    <table>
+      <thead><tr><th></th><th>raw</th><th>tar</th><th>CAR (wrapped, metadata-first)</th></tr></thead>
+      <tbody>
+        <tr><td>single file: stream, seek, video</td><td class="good">1.0 GB/s, seeks ok</td><td class="good">1.0 GB/s, seeks ok</td><td class="warn">0.5 GB/s baseline, 0.7 without CID re-check, seeks ok</td></tr>
+        <tr><td>filename survives</td><td class="warn">no, forever</td><td class="good">yes</td><td class="good">yes</td></tr>
+        <tr><td>directories</td><td class="warn">no</td><td>sequential only</td><td class="good">random access, HAMT</td></tr>
+        <tr><td>seek into file N of a bundle</td><td class="muted">n/a</td><td class="warn">O(N) header reads</td><td class="good">2 requests</td></tr>
+        <tr><td>dedup</td><td>none</td><td>none</td><td class="good">5x on the dedup input</td></tr>
+        <tr><td>encrypt throughput</td><td class="good">1.7 GB/s</td><td class="good">1.9 GB/s</td><td class="warn">0.5 GB/s baseline, 1.0 with parallel hashing (next slide)</td></tr>
+        <tr><td>plaintext on disk</td><td class="good">none</td><td class="good">none</td><td class="good">none (two-pass build)</td></tr>
+        <tr><td>plaintext CIDs, IPFS tooling</td><td>none</td><td>tar -x</td><td class="good">any IPFS tool opens the decrypted CAR</td></tr>
+        <tr><td><b>disqualifier</b></td><td class="warn">no names, no dirs</td><td class="warn">directory random access</td><td class="good">none found</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- 14 THE BUG -->
+  <section class="slide">
+    <h2><span class="kicker">the surprise</span>Every add of a 2 to 4 GiB file produces a root Kubo cannot parse</h2>
+    <div class="grid2">
+      <div>
+        <p>The first 4 GB video (3,891,799,298 bytes) failed for <b>all three</b> formats at the outer-CAR stage: <code>500 proto: cannot parse invalid wire-format data</code>. Not a payload issue: the outer object is built by filecoin-pin's own packer.</p>
+        <p><code>protons-runtime</code> stores the low word of a uint64 as <code>lo | 0</code>. For values in [2^31, 2^32) it goes negative, 5 bytes are reserved, <code>writeVarint64</code> writes one, and 4 bytes of <code>allocUnsafe</code> garbage follow. UnixFS filesize and blocksizes are uint64.</p>
+      </div>
+      <div>
+        <div class="formula" style="font-size:clamp(12px,1.3vw,17px)">blockSizes: [2147483647n] <span class="op">&rarr;</span> 080218ffffffff07... <span class="good">ok</span><br>blockSizes: [2147483648n] <span class="op">&rarr;</span> 0802180000000000... <span class="warn">bad</span><br>blockSizes: [4294967296n] <span class="op">&rarr;</span> 080218808080801020... <span class="good">ok</span></div>
+        <div class="card"><div class="label">status</div><div class="v" style="font-size:clamp(16px,1.6vw,22px)">filecoin-pin #773 filed</div><div class="sub">Reproduced with the PR worktree's own ipfs-unixfs 12.0.2 and independently confirmed by a Codex (gpt-6-astra) investigation with a differential test: 5,008 of 20,007 sampled values corrupt, all in the window. Upstream fix is one line. The 5 GiB input passed because its subtrees are 1 GiB and its total is above 2^32.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 RECOMMENDATION -->
+  <section class="slide">
+    <h2><span class="kicker">recommendation</span>Pin one profile: UnixFS CAR, wrapped, metadata-first</h2>
+    <div class="grid2">
+      <ul class="tight">
+        <li><b>Container:</b> CARv1, one root, <code>content_type: application/vnd.ipld.car</code>; decryptors reject anything else. A future change gets a new content type.</li>
+        <li><b>Root:</b> anonymous UnixFS directory with exactly one child named <code>basename(input)</code>, file or directory, so <code>add dir/</code> keeps its name.</li>
+        <li><b>DAG:</b> the <code>unixfs-v1-2025</code> profile the repo already pins; inner CIDs equal an unencrypted add.</li>
+        <li><b>Order:</b> dag-pb nodes first (BFS, each once), then raw leaves in file order, each CID once.</li>
+        <li><b>appMetadata:</b> unchanged (kdf, iterations, salt). Nothing about the plaintext in the public header.</li>
+      </ul>
+      <ul class="tight">
+        <li><b>Encrypt:</b> two passes, no plaintext temp file, re-hash leaves in pass 2 and abort if the input changed, stream into <code>fee.encrypt</code>. Symlinks skipped and reported.</li>
+        <li><b>decrypt &lt;file&gt; &lt;outDir&gt;:</b> create outDir 0700, write the wrapper's children (0600, exclusive), path-jailed, remove on failure. No single-file special case.</li>
+        <li><b>Viewer:</b> Range-fetch the envelope, read the metadata prefix once, serve files by span with one decryptRange per contiguous run of leaves. Never buffer the plaintext CAR.</li>
+        <li><b>Piece metadata:</b> name stays <code>encrypted.fee</code>; outer object unchanged.</li>
+      </ul>
+    </div>
+    <p class="muted" style="font-size:14px;max-width:none;margin-top:14px;border-top:1px solid var(--line);padding-top:10px">Accepted cost: about 2x CPU on add and on decrypt. Matched: raw and tar's seek parity (coalesced reader). Gained: names, directories, HAMT, dedup, plaintext CIDs, one viewer path for encrypted and unencrypted roots.</p>
+  </section>
+
+  <!-- 17 PERF FOLLOW-UP -->
+  <section class="slide">
+    <h2><span class="kicker">follow-up: closing the CPU gap</span>Encrypt 0.53 to 1.04 GB/s with two changes that touch no bytes on the wire</h2>
+    <div class="grid2">
+      <div>
+        <table>
+          <thead><tr><th>encrypt, 4.5 GB</th><th class="num">pass 1</th><th class="num">pass 2</th><th class="num">total ms</th><th class="num">GB/s</th></tr></thead>
+          <tbody>
+            <tr><td>baseline</td><td class="num">3253</td><td class="num">5217</td><td class="num">8561</td><td class="num warn">0.53</td></tr>
+            <tr><td>parallel hash (WebCrypto on the threadpool)</td><td class="num">1394</td><td class="num">5387</td><td class="num">6868</td><td class="num">0.66</td></tr>
+            <tr><td>+ stat guard instead of re-hash</td><td class="num">1375</td><td class="num">2897</td><td class="num">4360</td><td class="num good">1.04</td></tr>
+            <tr><td>raw reference</td><td class="num"></td><td class="num"></td><td class="num">2412</td><td class="num">1.88</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:12px;font-size:16px">CIDs identical; the remaining 1.4 s is computing them. Pass 2 is within 20 percent of raw.</p>
+      </div>
+      <div>
+        <table>
+          <thead><tr><th>decrypt, 4.5 GB</th><th class="num">ms</th><th class="num">GB/s</th></tr></thead>
+          <tbody>
+            <tr><td>baseline, sync hash per leaf</td><td class="num">8522</td><td class="num warn">0.53</td></tr>
+            <tr><td>async verification</td><td class="num">7257</td><td class="num">0.63</td></tr>
+            <tr><td>no verification (FEE tag is the check)</td><td class="num">6307</td><td class="num">0.72</td></tr>
+            <tr><td>raw reference</td><td class="num">4816</td><td class="num">0.94</td></tr>
+            <tr><td>fetch + FEE decrypt, no parse, no write</td><td class="num">4179</td><td class="num">1.09</td></tr>
+            <tr><td>cipher alone, 256 KiB chunks, 8 in flight</td><td class="num"></td><td class="num good">6.65</td></tr>
+          </tbody>
+        </table>
+        <p style="margin-top:12px;font-size:16px">The ceiling is FEE awaiting one <code>subtle.decrypt</code> per chunk, the same for every format. Pipelining that upstream is the next 2x; the gateway already delivers 2.4 GB/s.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 NOT VERIFIED + NEXT -->
+  <section class="slide">
+    <h2><span class="kicker">what this did not cover, and what happens next</span>Ship the profile before the first encrypted upload exists</h2>
+    <div class="grid2">
+      <div>
+        <div class="tag">not verified</div>
+        <ul class="tight">
+          <li>No real upload to a storage provider; Kubo served the packer's output.</li>
+          <li>Chrome on macOS only; no Safari, Firefox, or mobile memory limits.</li>
+          <li>One verified-fetch CAR run had a wrong hash while overlapping a killed process; the rerun was byte-identical. Flagged, not hidden.</li>
+          <li>verified-fetch needs <code>allowLocal</code> and <code>allowInsecure</code> for a local http gateway and held the whole 673 MB envelope in memory (2.26 GB RSS) with its default blockstore.</li>
+        </ul>
+      </div>
+      <div>
+        <div class="tag">next</div>
+        <ul class="tight">
+          <li>Update #771 and #772 to the pinned profile; rerun lint, typecheck, tests, reviews.</li>
+          <li>Reply to the CAR proposal on #771 with these numbers.</li>
+          <li>File the one-line fix upstream in ipfs/protons; until it lands, make <code>add</code> refuse single files in [2 GiB, 4 GiB).</li>
+          <li>Publish the bench (bench/pkg, results JSON, this deck) as a reference repo.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+</div>
+
+<div class="hud"><b id="cur">1</b> / <span id="total">1</span></div>
+<div class="nav"><button onclick="go(-1)">&larr; Prev</button><button onclick="go(1)">Next &rarr;</button></div>
+<div class="hint">&larr; &rarr; or Space to navigate &middot; F for fullscreen</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  let i = 0;
+  document.getElementById('total').textContent = slides.length;
+  function render() {
+    slides.forEach((s, n) => s.classList.toggle('active', n === i));
+    document.getElementById('cur').textContent = i + 1;
+    document.getElementById('bar').style.width = ((i + 1) / slides.length * 100) + '%';
+  }
+  function go(d) { i = Math.max(0, Math.min(slides.length - 1, i + d)); render(); }
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); go(1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); go(-1); }
+    else if (e.key === 'Home') { i = 0; render(); }
+    else if (e.key === 'End') { i = slides.length - 1; render(); }
+    else if (e.key.toLowerCase() === 'f') {
+      if (!document.fullscreenElement) document.documentElement.requestFullscreen();
+      else document.exitFullscreen();
+    }
+  });
+  render();
+</script>
+</body>
+</html>

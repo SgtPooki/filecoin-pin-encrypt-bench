@@ -1,0 +1,32 @@
+{
+ "input": "video4g",
+ "fmt": "raw",
+ "inputBytes": 3891561610,
+ "startedAt": "2026-10-15T01:10:29.496Z",
+ "encrypt": {
+  "fmt": "raw",
+  "input": "/private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bbb_4g.mp4",
+  "inputBytes": 3891561610,
+  "envelopeBytes": 3891799298,
+  "contentLength": 3891561610,
+  "planMs": 0,
+  "kdfMs": 88,
+  "encryptMs": 2143,
+  "totalMs": 2232,
+  "maxRssBytes": 880848,
+  "wallMs": 2443,
+  "timeMaxRss": 902742016
+ },
+ "publish": {
+  "root": "bafybeig734tdn3cwij5oogrxuqglfzzysvf6e7jwue5nllnbujhvuwujfi",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeig734tdn3cwij5oogrxuqglfzzysvf6e7jwue5nllnbujhvuwujfi",
+  "envelopeBytes": 3891799298,
+  "outerCarBytes": 3892130189,
+  "packMs": 5258,
+  "importMs": 4507,
+  "wallMs": 10212,
+  "timeMaxRss": 228425728
+ },
+ "peakTempDiskBytes": 7783929487,
+ "error": "file:///private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/pkg/lib/http-source.mjs:31\n  if (!res.ok) throw new Error(`GET ${url} -> ${res.status}`)\n                     ^\n\nError: GET http://127.0.0.1:8080/ipfs/bafybeig734tdn3cwij5oogrxuqglfzzysvf6e7jwue5nllnbujhvuwujfi -> 500\n    at streamUrl (file:///private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/pkg/lib/http-source.mjs:31:22)\n    at process.processTicksAndRejections (node:internal/process/task_queues:104:5)\n    at async file:///private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/pkg/bin/decrypt.mjs:14:16\n\nNode.js v24.18.0\n        0.23 real         0.19 user         0.04 sys\n           117293056  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                7247  page reclaims\n                 162  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   3  messages sent\n                   1  messages received\n                   0  signals received\n                 304  voluntary context switches\n                 381  involuntary context switches\n          1719050766  instructions retired\n           644260253  cycles elapsed\n            74472024  peak memory footprint\n"
+}

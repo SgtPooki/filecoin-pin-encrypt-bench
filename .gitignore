@@ -1,0 +1,8 @@
+node_modules/
+pkg/web/dist/
+pkg/web/.chrome-*/
+ipfs/
+inputs/*
+!inputs/README.md
+media/
+work/

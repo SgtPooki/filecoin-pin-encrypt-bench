@@ -1,0 +1,57 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>FEE payload bench</title>
+<video id="v" muted controls playsinline width="960"></video>
+<pre id="log"></pre>
+<script type="module" src="/page.js"></script>
+<script>
+const log = (m) => { document.getElementById('log').textContent += m + '\n' }
+const v = document.getElementById('v')
+window.bench = {
+  async start(fmt, root, path) {
+    const reg = await navigator.serviceWorker.register('/sw.js')
+    await navigator.serviceWorker.ready
+    if (!navigator.serviceWorker.controller) await new Promise((r) => navigator.serviceWorker.addEventListener('controllerchange', r, { once: true }))
+    const t0 = performance.now()
+    const firstFrame = new Promise((r) => v.requestVideoFrameCallback(() => r(performance.now() - t0)))
+    const loaded = new Promise((r, j) => { v.addEventListener('loadedmetadata', () => r(performance.now() - t0), { once: true }); v.addEventListener('error', () => j(new Error('video error ' + v.error?.code + ' ' + v.error?.message)), { once: true }) })
+    v.src = `/media/${fmt}/${root}/${path}`
+    const loadedMetadataMs = await loaded
+    const firstFrameMs = await firstFrame
+    log(`loadedmetadata ${loadedMetadataMs.toFixed(0)}ms firstFrame ${firstFrameMs.toFixed(0)}ms duration ${v.duration}`)
+    return { loadedMetadataMs, firstFrameMs, duration: v.duration, videoWidth: v.videoWidth, videoHeight: v.videoHeight }
+  },
+  async seekTo(frac) {
+    const target = frac * v.duration
+    const t0 = performance.now()
+    const seeked = new Promise((r) => v.addEventListener('seeked', () => r(performance.now() - t0), { once: true }))
+    const frame = new Promise((r) => v.requestVideoFrameCallback(() => r(performance.now() - t0)))
+    v.currentTime = target
+    const seekedMs = await seeked
+    const frameMs = await frame
+    log(`seek ${frac} -> ${target.toFixed(1)}s seeked ${seekedMs.toFixed(0)}ms frame ${frameMs.toFixed(0)}ms`)
+    return { frac, target, seekedMs, frameMs }
+  },
+  async playFor(seconds) {
+    const q0 = v.getVideoPlaybackQuality()
+    const start = v.currentTime
+    await v.play()
+    await new Promise((r) => setTimeout(r, seconds * 1000))
+    v.pause()
+    const q1 = v.getVideoPlaybackQuality()
+    const r = { from: start, to: v.currentTime, advanced: v.currentTime - start, framesShown: q1.totalVideoFrames - q0.totalVideoFrames, dropped: q1.droppedVideoFrames - q0.droppedVideoFrames, readyState: v.readyState, error: v.error?.message ?? null }
+    log(`play ${seconds}s: advanced ${r.advanced.toFixed(2)}s frames ${r.framesShown} dropped ${r.dropped}`)
+    return r
+  },
+  async playToEnd(timeoutMs) {
+    const ended = new Promise((r) => v.addEventListener('ended', () => r(true), { once: true }))
+    const timeout = new Promise((r) => setTimeout(() => r(false), timeoutMs))
+    await v.play()
+    const ok = await Promise.race([ended, timeout])
+    log(`playToEnd ended=${ok} at ${v.currentTime}`)
+    return { ended: ok, currentTime: v.currentTime, duration: v.duration }
+  },
+  async stats() { return (await fetch('/media-stats')).json() },
+  heap() { return performance.memory?.usedJSHeapSize },
+}
+</script>

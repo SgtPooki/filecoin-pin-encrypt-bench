@@ -1,0 +1,97 @@
+{
+ "fmt": "raw",
+ "root": "bafybeigxpwkhipj2j4tacpvvm2oomtuhuirgevanolkkg3yahee2bid4i4",
+ "path": "bbb_sunflower_2160p_60fps_normal.mp4",
+ "startedAt": "2026-10-15T01:15:02.757Z",
+ "start": {
+  "loadedMetadataMs": 335,
+  "firstFrameMs": 780.9000000953674,
+  "duration": 634.566666,
+  "videoWidth": 3840,
+  "videoHeight": 2160
+ },
+ "playHead": {
+  "from": 0,
+  "to": 4.960669,
+  "advanced": 4.960669,
+  "framesShown": 297,
+  "dropped": 21,
+  "readyState": 4,
+  "error": null
+ },
+ "seeks": [
+  {
+   "frac": 0.1,
+   "target": 63.456666600000005,
+   "seekedMs": 274.19999980926514,
+   "frameMs": 271.5,
+   "play": {
+    "from": 63.456666,
+    "to": 68.417448,
+    "advanced": 4.960781999999995,
+    "framesShown": 300,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  },
+  {
+   "frac": 0.5,
+   "target": 317.283333,
+   "seekedMs": 60.5,
+   "frameMs": 54.799999952316284,
+   "play": {
+    "from": 317.283333,
+    "to": 322.244577,
+    "advanced": 4.961243999999965,
+    "framesShown": 300,
+    "dropped": 1,
+    "readyState": 4,
+    "error": null
+   }
+  },
+  {
+   "frac": 0.9,
+   "target": 571.1099994000001,
+   "seekedMs": 128.69999980926514,
+   "frameMs": 123.19999980926514,
+   "play": {
+    "from": 571.109999,
+    "to": 576.070068,
+    "advanced": 4.960068999999976,
+    "framesShown": 300,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  }
+ ],
+ "tail": {
+  "frac": 0.987392971568412,
+  "target": 626.566666,
+  "seekedMs": 320.69999980926514,
+  "frameMs": 316.59999990463257,
+  "end": {
+   "ended": true,
+   "currentTime": 634.566666,
+   "duration": 634.566666
+  }
+ },
+ "pageHeapBytes": 1524738,
+ "sw": {
+  "raw|bafybeigxpwkhipj2j4tacpvvm2oomtuhuirgevanolkkg3yahee2bid4i4|bbb_sunflower_2160p_60fps_normal.mp4": {
+   "size": 673223862,
+   "prep": {
+    "prepMs": 73.5,
+    "requests": 2,
+    "bytes": 8192
+   },
+   "requests": 24,
+   "bytes": 55121256,
+   "ranges": 11,
+   "firstByteMsMedian": 2
+  }
+ },
+ "chromeRssPeakBytes": 1444626432,
+ "chromeRssSamples": 29
+}

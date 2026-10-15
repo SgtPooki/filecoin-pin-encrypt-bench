@@ -1,0 +1,104 @@
+{
+ "fmt": "car",
+ "root": "bafybeia6fkpqkt6czpbti2gmdulgaeobhtqyppdpogzvwgz7qpxvzaktwm",
+ "path": "bbb_4g5.mp4",
+ "startedAt": "2026-10-15T02:24:36.115Z",
+ "start": {
+  "loadedMetadataMs": 140,
+  "firstFrameMs": 391.2999999523163,
+  "duration": 4441.966666,
+  "videoWidth": 3840,
+  "videoHeight": 2160
+ },
+ "playHead": {
+  "from": 0,
+  "to": 4.96112,
+  "advanced": 4.96112,
+  "framesShown": 297,
+  "dropped": 0,
+  "readyState": 4,
+  "error": null
+ },
+ "seeks": [
+  {
+   "frac": 0.1,
+   "target": 444.19666660000007,
+   "seekedMs": 330.90000009536743,
+   "frameMs": 325.10000014305115,
+   "play": {
+    "from": 444.196666,
+    "to": 449.158737,
+    "advanced": 4.96207099999998,
+    "framesShown": 300,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  },
+  {
+   "frac": 0.5,
+   "target": 2220.983333,
+   "seekedMs": 72.59999990463257,
+   "frameMs": 67,
+   "play": {
+    "from": 2220.983333,
+    "to": 2225.944903,
+    "advanced": 4.961569999999938,
+    "framesShown": 299,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  },
+  {
+   "frac": 0.9,
+   "target": 3997.7699994000004,
+   "seekedMs": 35.5,
+   "frameMs": 30.399999856948853,
+   "play": {
+    "from": 3997.769999,
+    "to": 4002.730071,
+    "advanced": 4.960071999999855,
+    "framesShown": 299,
+    "dropped": 0,
+    "readyState": 4,
+    "error": null
+   }
+  }
+ ],
+ "tail": {
+  "frac": 0.9981989959399664,
+  "target": 4433.966666,
+  "seekedMs": 330.39999985694885,
+  "frameMs": 326.2999999523163,
+  "end": {
+   "ended": true,
+   "currentTime": 4441.966666,
+   "duration": 4441.966666
+  }
+ },
+ "full": {
+  "ended": true,
+  "currentTime": 4441.966666,
+  "duration": 4441.966666,
+  "wallMs": 384474
+ },
+ "pageHeapBytes": 829407,
+ "sw": {
+  "car|bafybeia6fkpqkt6czpbti2gmdulgaeobhtqyppdpogzvwgz7qpxvzaktwm|bbb_4g5.mp4": {
+   "size": 4541818176,
+   "prep": {
+    "prepMs": 82.70000004768372,
+    "requests": 3,
+    "bytes": 277274,
+    "metadataBytes": 217323
+   },
+   "requests": 29,
+   "bytes": 4603596821,
+   "ranges": 13,
+   "firstByteMsMedian": 3
+  }
+ },
+ "chromeRssPeakBytes": 1840971776,
+ "chromeRssSamples": 412
+}

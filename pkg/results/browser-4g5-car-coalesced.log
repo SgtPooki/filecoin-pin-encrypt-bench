@@ -1,0 +1,3 @@
+{"fmt":"car","coalesced":true,"start":{"meta":140,"frame":391},"seeks":[{"f":0.1,"seeked":331,"adv":4.96,"dropped":0},{"f":0.5,"seeked":73,"adv":4.96,"dropped":0},{"f":0.9,"seeked":36,"adv":4.96,"dropped":0}],"tail":{"seeked":330,"ended":true},"full":{"ended":true,"currentTime":4441.966666,"duration":4441.966666,"wallMs":384474},"sw":{"car|bafybeia6fkpqkt6czpbti2gmdulgaeobhtqyppdpogzvwgz7qpxvzaktwm|bbb_4g5.mp4":{"size":4541818176,"prep":{"prepMs":82.70000004768372,"requests":3,"bytes":277274,"metadataBytes":217323},"requests":29,"bytes":4603596821,"ranges":13,"firstByteMsMedian":3}},"rss":1840971776}
+
+[exited with code 0]

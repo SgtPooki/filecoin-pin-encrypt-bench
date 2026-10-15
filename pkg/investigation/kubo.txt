@@ -1,0 +1,93 @@
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs version
+ipfs version 0.43.1
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs init --profile=test
+generating ED25519 keypair...done
+peer identity: 12D3KooWDxzZkDP3P5dMWsHAxi99uGpYj8vZezrhP8EtvU41XrAm
+initializing IPFS node at /private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/pkg/investigation/kubo-repo
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=raw
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=raw --store-codec=raw investigation/block-bafkreibq4fevl27rgurgnxbp7adh42aqiyd6ouflxhj3gzmcxcxzbh6lla
+bafkreibq4fevl27rgurgnxbp7adh42aqiyd6ouflxhj3gzmcxcxzbh6lla
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=raw
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=raw --store-codec=raw investigation/block-bafkreiep7r3zi7kzajsrkp5hynbgh52p6g75cj5j2wngi34uonawsyptxu
+bafkreiep7r3zi7kzajsrkp5hynbgh52p6g75cj5j2wngi34uonawsyptxu
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeibdmhagqeoo5pqipw4fru56555impoz2c5maigq7mzad2tkei646m
+bafybeibdmhagqeoo5pqipw4fru56555impoz2c5maigq7mzad2tkei646m
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeibqawkaltgjfdebq4no6nmfcvkcw7k52xqzclkwfmrkn6oxw7srmy
+bafybeibqawkaltgjfdebq4no6nmfcvkcw7k52xqzclkwfmrkn6oxw7srmy
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeiffac7u6b3ezmbudnnd3wyijtoxd7a5wgh3odd6wxvjzwckejb73a
+bafybeiffac7u6b3ezmbudnnd3wyijtoxd7a5wgh3odd6wxvjzwckejb73a
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeig4ubjvh6l3eepmy74arvaudacuk7cpf46jxornwjiobbmmqo5oge
+bafybeig4ubjvh6l3eepmy74arvaudacuk7cpf46jxornwjiobbmmqo5oge
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeig52htp2cs6vxdbheuijfqobx36xcdctp2typyfim4ysmfli6xhyi
+bafybeig52htp2cs6vxdbheuijfqobx36xcdctp2typyfim4ysmfli6xhyi
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeigt7wofv4vnxbg3titijasuw4ptg5kfztec4smsk7opdt7z6djoxq
+bafybeigt7wofv4vnxbg3titijasuw4ptg5kfztec4smsk7opdt7z6djoxq
++ for f in 'investigation/block-*'
++ case "$f" in
++ codec=dag-pb
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/block-bafybeihkyuyjpxvdk77tpd3km3qb5nat2snfqqk5gkqquhif7rnfe35nv4
+bafybeihkyuyjpxvdk77tpd3km3qb5nat2snfqqk5gkqquhif7rnfe35nv4
++ for f in investigation/good.pb investigation/fill-0.pb investigation/1025MiB.pb investigation/3891799298.pb investigation/2049MiB-subtree.pb ../work/dbg/root.bin
+++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/good.pb
++ cid=bafybeiesjvunheqqdw73qn43dluiafy4nwpypngvchlfemdlnbfym3nhf4
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline files stat /ipfs/bafybeiesjvunheqqdw73qn43dluiafy4nwpypngvchlfemdlnbfym3nhf4
+bafybeiesjvunheqqdw73qn43dluiafy4nwpypngvchlfemdlnbfym3nhf4
+Size: 2147483648
+CumulativeSize: 16
+ChildBlocks: 0
+Type: file
+Mode: not set (not set)
+Mtime: not set
++ for f in investigation/good.pb investigation/fill-0.pb investigation/1025MiB.pb investigation/3891799298.pb investigation/2049MiB-subtree.pb ../work/dbg/root.bin
+++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/fill-0.pb
++ cid=bafybeieweegmflp3qapmilc557kxhd7q2m2rxczdrziyv3xu65bfz24sam
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline files stat /ipfs/bafybeieweegmflp3qapmilc557kxhd7q2m2rxczdrziyv3xu65bfz24sam
+Error: proto: cannot parse invalid wire-format data
++ for f in investigation/good.pb investigation/fill-0.pb investigation/1025MiB.pb investigation/3891799298.pb investigation/2049MiB-subtree.pb ../work/dbg/root.bin
+++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/1025MiB.pb
++ cid=bafybeigt7wofv4vnxbg3titijasuw4ptg5kfztec4smsk7opdt7z6djoxq
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline files stat /ipfs/bafybeigt7wofv4vnxbg3titijasuw4ptg5kfztec4smsk7opdt7z6djoxq
+bafybeigt7wofv4vnxbg3titijasuw4ptg5kfztec4smsk7opdt7z6djoxq
+Size: 1074790400
+CumulativeSize: 1074841783
+ChildBlocks: 2
+Type: file
+Mode: not set (not set)
+Mtime: not set
++ for f in investigation/good.pb investigation/fill-0.pb investigation/1025MiB.pb investigation/3891799298.pb investigation/2049MiB-subtree.pb ../work/dbg/root.bin
+++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/3891799298.pb
++ cid=bafybeig4ubjvh6l3eepmy74arvaudacuk7cpf46jxornwjiobbmmqo5oge
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline files stat /ipfs/bafybeig4ubjvh6l3eepmy74arvaudacuk7cpf46jxornwjiobbmmqo5oge
+Error: proto: cannot parse invalid wire-format data
++ for f in investigation/good.pb investigation/fill-0.pb investigation/1025MiB.pb investigation/3891799298.pb investigation/2049MiB-subtree.pb ../work/dbg/root.bin
+++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb investigation/2049MiB-subtree.pb
++ cid=bafybeihkyuyjpxvdk77tpd3km3qb5nat2snfqqk5gkqquhif7rnfe35nv4
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline files stat /ipfs/bafybeihkyuyjpxvdk77tpd3km3qb5nat2snfqqk5gkqquhif7rnfe35nv4
+Error: proto: cannot parse invalid wire-format data
++ for f in investigation/good.pb investigation/fill-0.pb investigation/1025MiB.pb investigation/3891799298.pb investigation/2049MiB-subtree.pb ../work/dbg/root.bin
+++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline dag put --input-codec=dag-pb --store-codec=dag-pb ../work/dbg/root.bin
++ cid=bafybeig734tdn3cwij5oogrxuqglfzzysvf6e7jwue5nllnbujhvuwujfi
++ /Users/sgtpooki/.npm/_npx/35ef1729bf3685f9/node_modules/kubo/kubo/ipfs --offline files stat /ipfs/bafybeig734tdn3cwij5oogrxuqglfzzysvf6e7jwue5nllnbujhvuwujfi
+Error: proto: cannot parse invalid wire-format data

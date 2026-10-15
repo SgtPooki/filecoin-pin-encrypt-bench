@@ -1,0 +1,19 @@
+**Do not adopt CAR-in-envelope, and do not ship raw payloads either.** Pin one payload before release: a ustar (PAX for long or UTF-8 names) inside the FEE. Nothing is stored yet, so a second format later is a permanent decryptor fork.
+
+The proposal is right that raw bytes are the wrong long-term payload. A UnixFS CAR is the wrong replacement.
+
+**CAR versus raw.** Privacy on the outside is a wash. Both are one UnixFS file named `encrypted.fee`; `appMetadata` stays public KDF parameters; names stay out of piece metadata. Ciphertext length still tracks plaintext size. A CAR leaks a little more (many tiny files inflate UnixFS overhead; `content_type: application/vnd.ipld.car` announces "CAR"). Do not put names in `appMetadata`. That header is readable without the key.
+
+Filenames do not survive a CAR unless you force a wrap. UnixFS nodes do not store their own name. `ipfs-unixfs-importer` drops a single common root unless `wrapWithDirectory` is set (`tree-builder.js`: keep the synthetic root only when `wrapWithDirectory || (singleRoot && childCount > 1)`). `createCarFromDirectory` does not set that flag, so the directory basename survives only as piece `name`, which `--encrypt` replaces with `encrypted.fee`. A single file has no name in the DAG at all. The wrapper directory itself is still unnamed.
+
+Range playback dies. `decryptRange` addresses plaintext offsets, which are file offsets only for a raw payload. This repo appends CAR blocks as Helia `put`s them, not depth-first, and `ipfs-unixfs-exporter` is CID-addressed: it needs the whole CAR or an index. Depth-first order would not fix it. Each 1 MiB leaf is its own CAR section, so file byte N is not a computable ciphertext offset. A ~1 GiB MP4 becomes a full decrypt into a blockstore (OPFS, or an out-of-memory crash in the browser). You cannot add range later without a new payload. HTML and Markdown are fine either way.
+
+`decryptFileWithPassword` writes one mode-0600 file and deletes it on failure. A tree needs a directory, per-entry collisions, and rollback. A generic FEE tool would emit a CAR, not the user's files. Gateway `?format=car` on the root is a CAR of the envelope, not the inner CAR. Temp disk goes to about 3× (inner CAR + `encrypted.fee` + outer CAR).
+
+**Now versus later.** There is no compatibility reason to ship raw first. Uploads are immutable. Raw-then-CAR means every CLI, viewer, and agent branches forever, and today's `appMetadata` has no payload marker. "CAR in v1" after this release is the expensive path.
+
+**Better than both.** Encrypt a ustar. Set `content_type` to `application/x-tar` and `appMetadata.payload` to `tar/v1`. Names and directories stay inside the ciphertext; any FEE decryptor emits a tar a normal `tar` can extract. A single MP4 is a 512-byte header plus contiguous bytes, so `decryptRange` still maps to media offsets after one header read. Multi-file seek is "walk headers, then one range." Tar size is computable, so you can stream into the envelope. `contentLength` is optional, but the current path encrypts a finished file. Pin these rules: do not follow symlinks (`globSource` follows them today), reject `..` and absolute paths, root every archive at the source basename, and decrypt into a new directory deleted on failure.
+
+Skip an inner UnixFS CID. The shared link is the outer root. A CAR plus an encrypted offset index would restore range only by reinventing the manifest the CAR was supposed to replace.
+
+**If you adopt CAR anyway, do it now and freeze it.** Use a vendor `content_type`, not bare `application/vnd.ipld.car`. Set `appMetadata.payload` to `unixfs-car/v1`. Require CARv1, one root, `wrapWithDirectory: true`, paths rooted at the source basename, and the unixfs-v1-2025 profile. Do not follow symlinks. Decrypt must extract into a new directory using link names, jail paths, and reject a missing wrap or extra roots. Accept that inner-file `decryptRange` is out of scope forever.

@@ -1,0 +1,2 @@
+{ tested: 20007, bad: 5008, outside: 0, afterUnsignedNormalization: 0 }
+preseeded valid output 0802188081808008208081808008 equals independent true

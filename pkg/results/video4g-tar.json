@@ -1,0 +1,35 @@
+{
+ "input": "video4g",
+ "fmt": "tar",
+ "inputBytes": 3891561610,
+ "startedAt": "2026-10-15T01:10:45.446Z",
+ "encrypt": {
+  "fmt": "tar",
+  "input": "/private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bbb_4g.mp4",
+  "inputBytes": 3891561610,
+  "envelopeBytes": 3891801217,
+  "contentType": "application/x-tar",
+  "planMs": 1,
+  "kdfMs": 89,
+  "encryptMs": 1702,
+  "totalMs": 1791,
+  "maxRssBytes": 471824,
+  "files": 1,
+  "dirs": 0,
+  "skippedSymlinks": [],
+  "wallMs": 1950,
+  "timeMaxRss": 483901440
+ },
+ "publish": {
+  "root": "bafybeidfy43eruuwlu2ihtja6kvnr2cqwscteyvzhdweqpamziuf2bogyu",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeidfy43eruuwlu2ihtja6kvnr2cqwscteyvzhdweqpamziuf2bogyu",
+  "envelopeBytes": 3891801217,
+  "outerCarBytes": 3892132108,
+  "packMs": 5120,
+  "importMs": 4419,
+  "wallMs": 9855,
+  "timeMaxRss": 229244928
+ },
+ "peakTempDiskBytes": 7783933325,
+ "error": "0/node_modules/filecoin-encryption-envelope/dist/src/internal/web-crypto.js:47\n            throw new AuthenticationError('AES-256-GCM authentication failed: the CEK is wrong or authenticated envelope data was changed.', { cause });\n                  ^\n\nAuthenticationError: AES-256-GCM authentication failed: the CEK is wrong or authenticated envelope data was changed.\n    at aesGcmDecrypt (file:///private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/pkg/node_modules/.pnpm/filecoin-encryption-envelope@0.1.0/node_modules/filecoin-encryption-envelope/dist/src/internal/web-crypto.js:47:19)\n    at async Object.pull (file:///private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/pkg/node_modules/.pnpm/filecoin-encryption-envelope@0.1.0/node_modules/filecoin-encryption-envelope/dist/src/aes-gcm-stream.js:219:35) {\n  [cause]: DOMException [OperationError]: The operation failed for an operation-specific reason\n      at new DOMException (node:internal/per_context/domexception:76:18) {\n    [cause]: [Error: Cipher job failed]\n  }\n}\n\nNode.js v24.18.0\n        0.29 real         0.28 user         0.04 sys\n           118833152  maximum resident set size\n                   0  average shared memory size\n                   0  average unshared data size\n                   0  average unshared stack size\n                7321  page reclaims\n                 167  page faults\n                   0  swaps\n                   0  block input operations\n                   0  block output operations\n                   3  messages sent\n                   1  messages received\n                   0  signals received\n                 303  voluntary context switches\n                 403  involuntary context switches\n          2755369662  instructions retired\n           877480489  cycles elapsed\n            75373048  peak memory footprint\n"
+}

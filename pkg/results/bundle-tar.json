@@ -1,0 +1,291 @@
+{
+ "input": "bundle",
+ "fmt": "tar",
+ "startedAt": "2026-10-15T01:09:56.116Z",
+ "encrypt": {
+  "fmt": "tar",
+  "input": "/private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bundle",
+  "envelopeBytes": 882044145,
+  "contentType": "application/x-tar",
+  "planMs": 10,
+  "kdfMs": 88,
+  "encryptMs": 469,
+  "totalMs": 567,
+  "maxRssBytes": 240416,
+  "files": 354,
+  "dirs": 6,
+  "skippedSymlinks": [
+   "bundle/docs/evil_abs_link",
+   "bundle/docs/evil_rel_link",
+   "bundle/docs/link_to_large.bin"
+  ],
+  "wallMs": 704,
+  "timeMaxRss": 246808576
+ },
+ "publish": {
+  "root": "bafybeia5c7okgnjgwm6sslszoqs7yi6fftgkiogqe5fac47ntfbj5fyesm",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeia5c7okgnjgwm6sslszoqs7yi6fftgkiogqe5fac47ntfbj5fyesm",
+  "envelopeBytes": 882044145,
+  "outerCarBytes": 882119192,
+  "packMs": 1102,
+  "importMs": 904,
+  "wallMs": 2241,
+  "timeMaxRss": 214155264
+ },
+ "peakTempDiskBytes": 1764163337,
+ "decrypt": {
+  "fmt": "tar",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeia5c7okgnjgwm6sslszoqs7yi6fftgkiogqe5fac47ntfbj5fyesm",
+  "contentType": "application/x-tar",
+  "totalMs": 1074,
+  "firstPlainMs": 117,
+  "maxRssBytes": 220496,
+  "files": 354,
+  "dirs": 6,
+  "skipped": [],
+  "bytes": 881713112,
+  "listMs": 119.74037499999999,
+  "wallMs": 1225,
+  "timeMaxRss": 226033664
+ },
+ "verify": {
+  "ok": true,
+  "diffLines": [
+   "Only in /private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bundle/docs: evil_abs_link",
+   "Only in /private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bundle/docs: evil_rel_link",
+   "Only in /private/tmp/claude-501/-Users-sgtpooki-code-work-filoz-filecoin-project-filecoin-pin/cd4ea61b-6abb-414b-952e-88099c98f53d/scratchpad/bench/inputs/bundle/docs: link_to_large.bin"
+  ]
+ },
+ "seek": {
+  "fmt": "tar",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeia5c7okgnjgwm6sslszoqs7yi6fftgkiogqe5fac47ntfbj5fyesm",
+  "path": "bundle/assets/video.mp4",
+  "parseMs": 96,
+  "parseBytes": 3041,
+  "prepMs": 47,
+  "headerReads": 8,
+  "entriesWalked": 8,
+  "prepRequests": 17,
+  "prepBytes": 2126759,
+  "seeks": [
+   {
+    "offset": 0,
+    "len": 65536,
+    "ttfbMs": 4,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 116253110,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 129387814,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 157358853,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 205188309,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 227353659,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 336611931,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 390345372,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 425761522,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 441022402,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 266256,
+    "ok": true
+   },
+   {
+    "offset": 453118593,
+    "len": 65536,
+    "ttfbMs": 8,
+    "ms": 8,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 457385151,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 476107274,
+    "len": 65536,
+    "ttfbMs": 7,
+    "ms": 7,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 497746285,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 534417755,
+    "len": 65536,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 557061776,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 5,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 594514628,
+    "len": 65536,
+    "ttfbMs": 5,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 670385641,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   },
+   {
+    "offset": 673158326,
+    "len": 65536,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 527361,
+    "ok": true
+   },
+   {
+    "offset": 673223861,
+    "len": 1,
+    "ttfbMs": 6,
+    "ms": 6,
+    "requests": 2,
+    "bytesFetched": 265201,
+    "ok": true
+   }
+  ],
+  "allOk": true,
+  "ttfbMedianMs": 6,
+  "ttfbMaxMs": 8,
+  "bytesPerSeekAvg": 317686,
+  "maxRssBytes": 133808,
+  "wallMs": 429,
+  "timeMaxRss": 137216000
+ },
+ "seekSmall": {
+  "fmt": "tar",
+  "url": "http://127.0.0.1:8080/ipfs/bafybeia5c7okgnjgwm6sslszoqs7yi6fftgkiogqe5fac47ntfbj5fyesm",
+  "path": "bundle/docs/small_99.txt",
+  "parseMs": 97,
+  "parseBytes": 3041,
+  "prepMs": 2032,
+  "headerReads": 362,
+  "entriesWalked": 360,
+  "prepRequests": 725,
+  "prepBytes": 90083420,
+  "seeks": [
+   {
+    "offset": 0,
+    "len": 1203,
+    "ttfbMs": 4,
+    "ms": 4,
+    "requests": 2,
+    "bytesFetched": 140785,
+    "ok": true
+   }
+  ],
+  "allOk": true,
+  "ttfbMedianMs": 4,
+  "ttfbMaxMs": 4,
+  "bytesPerSeekAvg": 140785,
+  "maxRssBytes": 150848,
+  "wallMs": 2308,
+  "timeMaxRss": 154583040
+ },
+ "ok": true
+}
