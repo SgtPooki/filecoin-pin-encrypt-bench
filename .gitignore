@@ -6,3 +6,6 @@ inputs/*
 !inputs/README.md
 media/
 work/
+pkg/pathing/demo/dist/
+pkg/pathing/demo/.src/
+pkg/pathing/demo/mobile.png

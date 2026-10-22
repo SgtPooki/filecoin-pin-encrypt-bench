@@ -5,28 +5,37 @@
 import * as fee from 'filecoin-encryption-envelope'
 import { DAG_PB, RAW, layout, scanCar } from './car-layout.mjs'
 
-export async function openCarReader(source, cek) {
+export async function openCarReader(source, cek, { prepLength = 1 << 20 } = {}) {
+  // Prep reads are bounded (prepLength, then 4x until the directory nodes close) rather than open-ended:
+  // a service-worker gateway fetches every block an open-ended Range covers before answering, which
+  // turned the index read into a whole-file download on inbrowser.link.
   const t0 = performance.now()
-  const { stream, totalPlaintextLength } = await fee.decryptRange(source, cek, { offset: 0 })
-  const reader = stream.getReader()
   const nodes = new Map()
-  let buf = new Uint8Array(0), root, lay, consumedBlocks = 0, rawSeen = false
-  while (!lay) {
-    const { value, done } = await reader.read()
-    if (done) break
-    const nb = new Uint8Array(buf.length + value.length); nb.set(buf); nb.set(value, buf.length); buf = nb
-    const { header, blocks } = scanCar(buf)
-    if (!header) continue
-    root ??= header.roots[0]
-    for (const b of blocks.slice(consumedBlocks)) {
-      if (b.cid.code === DAG_PB) nodes.set(b.cid.toString(), { cid: b.cid, bytes: b.bytes })
-      else if (b.cid.code === RAW) rawSeen = true
+  let root, lay, totalPlaintextLength
+  for (let length = prepLength; !lay; length *= 4) {
+    const range = totalPlaintextLength == null || length < totalPlaintextLength ? { offset: 0, length } : { offset: 0 }
+    const opened = await fee.decryptRange(source, cek, range)
+    totalPlaintextLength = opened.totalPlaintextLength
+    const reader = opened.stream.getReader()
+    let buf = new Uint8Array(0), consumedBlocks = 0, rawSeen = false
+    nodes.clear()
+    while (!lay) {
+      const { value, done } = await reader.read()
+      if (done) break
+      const nb = new Uint8Array(buf.length + value.length); nb.set(buf); nb.set(value, buf.length); buf = nb
+      const { header, blocks } = scanCar(buf)
+      if (!header) continue
+      root ??= header.roots[0]
+      for (const b of blocks.slice(consumedBlocks)) {
+        if (b.cid.code === DAG_PB) nodes.set(b.cid.toString(), { cid: b.cid, bytes: b.bytes })
+        else if (b.cid.code === RAW) rawSeen = true
+      }
+      consumedBlocks = blocks.length
+      try { lay = layout(root, nodes) } catch (e) { if (!/metadata incomplete/.test(e.message)) throw e; if (rawSeen) throw new Error('raw leaf before metadata closure: not metadata-first') }
     }
-    consumedBlocks = blocks.length
-    try { lay = layout(root, nodes) } catch (e) { if (!/metadata incomplete/.test(e.message)) throw e; if (rawSeen) throw new Error('raw leaf before metadata closure: not metadata-first') }
+    await reader.cancel().catch(() => {})
+    if (!lay && range.length == null) throw new Error('metadata never closed')
   }
-  await reader.cancel().catch(() => {})
-  if (!lay) throw new Error('metadata never closed')
   const prepMs = performance.now() - t0
   const metadataBytes = lay.leaves[0]?.offset ?? lay.total
   if (lay.total !== totalPlaintextLength) throw new Error(`layout total ${lay.total} != plaintext ${totalPlaintextLength}`)
@@ -88,5 +97,5 @@ export async function openCarReader(source, cek) {
         return any
     }
   }
-  return { lay, root, read, prepMs, metadataBytes, files: lay.files, size: (p) => lay.files.get(p)?.size }
+  return { lay, root, nodes, read, prepMs, metadataBytes, files: lay.files, size: (p) => lay.files.get(p)?.size }
 }
